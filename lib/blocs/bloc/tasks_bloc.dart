@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:equatable/equatable.dart';
 import 'package:todo_app/blocs/bloc_export.dart';
 import 'package:todo_app/models/task.dart';
@@ -9,6 +11,7 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
     on<AddTask>(_onAddTask);
     on<UpdateTask>(_onUpdateTask);
     on<DeleteTask>(_onDeleteTask);
+    on<RemoveTask>(_onRemoveTask);
   }
 
   void _onAddTask(AddTask event, Emitter<TasksState> emit) {
@@ -34,6 +37,15 @@ class TasksBloc extends HydratedBloc<TasksEvent, TasksState> {
   void _onDeleteTask(DeleteTask event, Emitter<TasksState> emit) {
     final state = this.state;
     emit(TasksState(allTask: List.from(state.allTask)..remove(event.task)));
+  }
+
+  void _onRemoveTask(RemoveTask event, Emitter<TasksState> emit) {
+    final state = this.state;
+    emit(TasksState(
+      allTask: List.from(state.allTask)..remove(event.task),
+      removedTasks: List.from(state.removedTasks)
+        ..add(event.task.copyWith(isDelete: true)),
+    ));
   }
 
   @override
