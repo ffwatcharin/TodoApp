@@ -1,6 +1,11 @@
-# todo_app
+# todoApp
 
 A new Flutter project.
+- local notification
+- bloc
+
+![Screenshot_1694722399](https://github.com/ffwatcharin/TodoApp/assets/95212845/d27012c2-028a-4cfb-b586-7ec5d55d425f)
+
 
 ## Getting Started
 
